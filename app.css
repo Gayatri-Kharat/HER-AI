@@ -158,26 +158,30 @@ body {
   flex: 1;
   margin-left: var(--sidebar-w);
   min-height: 100vh;
+  min-width: 0;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 /* ========== TOPBAR ========== */
 .topbar {
-  height: var(--topbar-h);
+  min-height: var(--topbar-h);
   background: var(--card);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.5rem;
+  padding: 0.5rem 1.5rem;
   position: sticky;
   top: 0;
   z-index: 50;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-.topbar-left { display: flex; align-items: center; gap: 1rem; }
-.topbar-right { display: flex; align-items: center; gap: 1rem; }
+.topbar-left { display: flex; align-items: center; gap: 1rem; min-width: 0; }
+.topbar-right { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
 
 .mobile-menu {
   display: none;
@@ -269,6 +273,8 @@ body {
   padding: 1.5rem;
   flex: 1;
   animation: pageIn 0.35s ease-out;
+  overflow-x: hidden;
+  min-width: 0;
 }
 
 .page.active { display: block; }
@@ -314,7 +320,7 @@ body {
 /* ========== DASH STATS ========== */
 .dash-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
@@ -736,7 +742,7 @@ select {
 
 .skill-path {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
@@ -925,7 +931,7 @@ select {
 /* ========== FINANCE ========== */
 .finance-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
@@ -1008,7 +1014,7 @@ select {
 /* ========== LEADERSHIP / BRANDING ========== */
 .leadership-grid, .branding-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
   gap: 1rem;
 }
 
@@ -1049,7 +1055,7 @@ select {
 }
 
 .lo-label { font-size: 0.75rem; font-weight: 700; color: var(--plum); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
-.lo-text { font-size: 0.88rem; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
+.lo-text { font-size: 0.88rem; line-height: 1.6; color: var(--text); white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; }
 
 .micro-lesson {
   background: var(--bg);
@@ -1242,7 +1248,7 @@ select {
 .chat-msg.ai .cm-bubble { background: var(--bg); border-bottom-left-radius: 4px; }
 .chat-msg.user .cm-bubble { background: linear-gradient(135deg, var(--plum), #8B3A7F); color: #fff; border-bottom-right-radius: 4px; }
 
-.cm-text { white-space: pre-wrap; }
+.cm-text { white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; }
 
 .chat-input-area {
   display: flex;
@@ -1440,69 +1446,185 @@ select {
   .dash-grid { grid-template-columns: 1fr 1fr; }
   .dash-card.large { grid-column: span 2; }
   .page { padding: 1.2rem; }
+  .lead-card { padding: 1.2rem; }
+  .lead-textarea { min-height: 80px; }
 }
 
 /* Mobile landscape / small tablet */
 @media (max-width: 768px) {
   .sidebar { transform: translateX(-100%); }
   .sidebar.open { transform: translateX(0); }
-  .main { margin-left: 0; }
+  .main { margin-left: 0; width: 100%; }
   .mobile-menu { display: block; }
   .sidebar-toggle { display: block; }
+
   .leadership-grid, .branding-grid { grid-template-columns: 1fr; }
   .dash-stats { grid-template-columns: repeat(2, 1fr); }
   .dash-grid { grid-template-columns: 1fr; }
   .dash-card.large { grid-column: span 1; }
+  .quick-add-grid { grid-template-columns: repeat(2, 1fr); }
+  .finance-stats { grid-template-columns: repeat(2, 1fr); }
+
   .page { padding: 1rem; }
   .page-title { font-size: 1.3rem; }
-  .topbar { padding: 0 1rem; }
+  .page-header { margin-bottom: 1rem; }
+  .topbar { padding: 0.5rem 1rem; }
   .topbar-greeting { font-size: 0.88rem; }
+
   .et-levels { flex-direction: column; }
   .et-btn { padding: 0.6rem; font-size: 0.82rem; }
   .task-item { flex-wrap: wrap; gap: 0.5rem; }
   .ti-body { min-width: 0; flex: 1; }
-  .sched-item { flex-wrap: wrap; }
-  .ai-banner { flex-direction: column; text-align: center; }
-  .chat-container { height: calc(100vh - 200px); }
+  .ti-text { word-break: break-word; }
+
+  .sched-item { flex-wrap: wrap; gap: 0.5rem; }
+  .sched-time { width: auto; }
+
+  .ai-banner { flex-direction: column; text-align: center; gap: 0.5rem; }
+
+  .chat-container { height: calc(100vh - 180px); }
+  .chat-msg { max-width: 90%; }
+  .cm-bubble { font-size: 0.85rem; }
+
   .home-tabs { flex-wrap: wrap; }
   .htab { font-size: 0.75rem; padding: 0.4rem 0.8rem; }
   textarea { font-size: 0.85rem; }
-  .modal-content { width: 95%; max-width: 95%; margin: 1rem; padding: 1.2rem; }
+
+  .modal { width: 95%; max-width: 95%; max-height: 90vh; overflow-y: auto; }
+  .modal-body { padding: 1rem; }
+
+  .learning-progress { gap: 0.8rem; }
+  .lp-stat { min-width: 80px; padding: 0.8rem; }
+  .lp-value { font-size: 1.4rem; }
+
+  .skill-path { grid-template-columns: 1fr; }
+  .ic-messages { max-height: 300px; }
+  .ic-input-area { flex-direction: column; gap: 0.4rem; }
+  .ic-input-area button { width: 100%; }
+
+  .geo-info-card { flex-direction: column; text-align: center; }
+  .geo-rules { justify-content: center; }
+  .geo-reminder-item { flex-wrap: wrap; gap: 0.5rem; }
+
+  .grocery-item { flex-wrap: wrap; }
+
+  .expense-item { flex-wrap: wrap; gap: 0.5rem; }
+  .expense-categories { gap: 0.4rem; }
+  .exp-cat { font-size: 0.75rem; padding: 0.4rem 0.8rem; }
+
+  .lead-actions { flex-wrap: wrap; }
+  .lead-card { padding: 1rem; }
+  .lo-text { font-size: 0.82rem; }
+
+  .well-card { padding: 1rem; }
+  .wellness-score-ring { width: 100px; height: 100px; }
+  .score-value { font-size: 1.4rem; }
+  .mood-selector { gap: 0.4rem; }
+  .mood-btn { min-width: 50px; padding: 0.6rem 0.4rem; font-size: 1.1rem; }
+
+  .toolbar { gap: 0.5rem; }
+  .toolbar-left, .toolbar-right { flex-wrap: wrap; }
+
+  .settings-grid { grid-template-columns: 1fr; }
+  .settings-card { padding: 1rem; }
+
+  .success-timeline .win-item { flex-wrap: wrap; }
+  .win-date { width: auto; }
 }
 
 /* Mobile portrait */
 @media (max-width: 480px) {
   .dash-stats { grid-template-columns: 1fr; }
   .dsc-value { font-size: 1.2rem; }
+  .dsc-icon { width: 36px; height: 36px; font-size: 1rem; }
+  .dash-stat-card { padding: 0.8rem; gap: 0.6rem; }
+
+  .page { padding: 0.8rem; }
   .page-title { font-size: 1.1rem; }
   .page-sub { font-size: 0.8rem; }
-  .topbar-right { gap: 0.4rem; }
-  .cycle-indicator, .energy-badge { padding: 0.25rem 0.5rem; font-size: 0.65rem; }
+
+  .topbar { padding: 0.4rem 0.6rem; gap: 0.3rem; }
+  .topbar-right { gap: 0.3rem; }
+  .topbar-left { gap: 0.5rem; }
+  .cycle-indicator, .energy-badge { padding: 0.2rem 0.4rem; font-size: 0.6rem; }
+  .cycle-indicator .cycle-text, .energy-badge .energy-text { display: none; }
   .topbar-greeting { display: none; }
-  .btn, .btn-primary { font-size: 0.78rem; padding: 0.5rem 0.8rem; }
+  .notif-btn { font-size: 1rem; padding: 0.2rem; }
+  .avatar { width: 30px; height: 30px; font-size: 0.9rem; }
+
+  .btn, .btn-primary { font-size: 0.75rem; padding: 0.45rem 0.7rem; }
+  .btn-sm { font-size: 0.7rem; padding: 0.3rem 0.6rem; }
+
+  .quick-add-grid { grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+  .quick-btn { font-size: 0.75rem; padding: 0.6rem 0.3rem; }
+
   .spending-bar-row { flex-wrap: wrap; }
-  .sb-label { min-width: 60px; font-size: 0.72rem; }
+  .sb-label { min-width: 50px; font-size: 0.7rem; }
+
   .suggestion-item { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
-  .si-icon { font-size: 1.2rem; }
-  .si-text { font-size: 0.8rem; }
-  .dc-header { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
-  .et-suggestion { font-size: 0.78rem; }
-  .energy-match, .energy-defer { font-size: 0.6rem; }
+  .si-icon { font-size: 1.1rem; }
+  .si-text { font-size: 0.78rem; }
+
+  .dc-header { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+  .dc-header h3 { font-size: 0.85rem; }
+
+  .et-suggestion { font-size: 0.75rem; }
+  .energy-match, .energy-defer { font-size: 0.55rem; padding: 2px 5px; }
+
+  .task-item { padding: 0.6rem; }
+  .ti-text { font-size: 0.82rem; }
   .ti-meta { flex-wrap: wrap; gap: 0.3rem; }
-  .ti-priority { font-size: 0.65rem; }
-  .chat-input-area { flex-direction: column; gap: 0.4rem; }
-  .chat-input-area input { font-size: 0.85rem; }
+  .ti-priority { font-size: 0.6rem; }
+  .ti-check { width: 18px; height: 18px; }
+
+  .chat-container { height: calc(100vh - 160px); }
+  .chat-input-area { flex-direction: column; gap: 0.4rem; padding: 0.6rem 0.8rem; }
+  .chat-input-area input { font-size: 0.82rem; padding: 0.6rem 0.8rem; }
   .chat-input-area button { width: 100%; }
-  .cm-bubble { max-width: 95%; font-size: 0.83rem; }
-  .geo-reminder-item { flex-wrap: wrap; gap: 0.5rem; }
-  .grocery-item { flex-wrap: wrap; }
-  .well-card { padding: 1rem; }
-  .mood-options { flex-wrap: wrap; justify-content: center; }
-  .mood-btn { font-size: 1.3rem; padding: 0.5rem; }
-  .sched-item { padding: 0.6rem 0; }
-  .sched-time { font-size: 0.75rem; min-width: 40px; }
-  .sched-title { font-size: 0.82rem; }
+  .cm-bubble { max-width: 95%; font-size: 0.8rem; padding: 0.6rem 0.8rem; }
+  .cm-avatar { font-size: 1rem; }
+  .chat-msg { max-width: 95%; }
+
+  .sched-item { padding: 0.6rem 0.8rem; gap: 0.5rem; }
+  .sched-time { font-size: 0.72rem; min-width: 36px; width: auto; }
+  .sched-title { font-size: 0.8rem; }
+  .sched-bar { width: 3px; height: 28px; }
   .workload-bar { height: 6px; }
-  .meal-day h4 { font-size: 0.9rem; }
-  .meal-item { font-size: 0.8rem; }
+
+  .finance-stats { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .fs-card { padding: 0.8rem; }
+  .fs-value { font-size: 1rem; }
+  .fs-label { font-size: 0.7rem; }
+  .ei-amount { font-size: 0.82rem; }
+
+  .geo-reminder-item { flex-wrap: wrap; gap: 0.4rem; padding: 0.6rem; }
+  .grocery-item { flex-wrap: wrap; gap: 0.4rem; padding: 0.6rem; }
+  .gi-name { font-size: 0.82rem; }
+  .meal-day { padding: 0.8rem; }
+  .meal-day h4 { font-size: 0.85rem; }
+  .meal-item { font-size: 0.78rem; }
+
+  .lead-textarea { font-size: 0.82rem; padding: 0.6rem; }
+  .lead-card h3 { font-size: 0.9rem; }
+  .lead-desc { font-size: 0.78rem; }
+  .lead-output { padding: 0.8rem; }
+  .lo-text { font-size: 0.78rem; }
+
+  .well-card { padding: 0.8rem; }
+  .well-card h3 { font-size: 0.9rem; }
+  .mood-btn { min-width: 44px; padding: 0.5rem 0.3rem; font-size: 1rem; }
+  .mood-btn span { font-size: 0.65rem; }
+  .mood-dot { width: 30px; height: 30px; font-size: 0.85rem; }
+  .ct-phase-name { font-size: 1rem; }
+
+  .skill-card { padding: 0.8rem; }
+  .skill-card h4 { font-size: 0.88rem; }
+  .lp-stat { padding: 0.6rem; }
+  .lp-value { font-size: 1.2rem; }
+  .lp-label { font-size: 0.7rem; }
+  .ic-msg { font-size: 0.8rem; padding: 0.6rem 0.8rem; max-width: 95%; }
+
+  .toolbar .btn { font-size: 0.7rem; padding: 0.35rem 0.6rem; }
+
+  .toast { font-size: 0.78rem; padding: 0.6rem 1rem; }
 }
