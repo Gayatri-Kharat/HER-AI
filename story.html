@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HER-AI — Priya's Story</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --plum: #6B2D5B;
+  --plum-deep: #4A1942;
+  --rose: #E8526F;
+  --gold: #D4A853;
+  --gold-light: #F5DCA0;
+  --mint: #7ECEC1;
+  --lavender: #C5A3CF;
+  --coral: #F08A6D;
+  --sky: #7EB5D6;
+  --cream: #FFF8F0;
+  --night: #0a0a0f;
+  --white: #fff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; background: var(--night); font-family: 'DM Sans', sans-serif; }
+
+.scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+.scene.active { opacity: 1; pointer-events: all; }
+
+/* ===== SCENE 1: INTRO ===== */
+.sc1 {
+  background: linear-gradient(135deg, var(--plum-deep) 0%, var(--plum) 40%, #8B3A7F 70%, var(--rose) 100%);
+  text-align: center;
+}
+.sc1-badge {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 8px 28px;
+  border-radius: 40px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.3s forwards;
+}
+.sc1-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  color: var(--white);
+  font-weight: 900;
+  line-height: 1.1;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.6s forwards;
+}
+.sc1-title .gold { color: var(--gold); }
+.sc1-sub {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: rgba(255,255,255,0.6);
+  margin-top: 20px;
+  letter-spacing: 1px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.9s forwards;
+}
+
+/* ===== SCENE 2: MEET PRIYA ===== */
+.sc2 { background: var(--cream); }
+.priya-card {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  max-width: 900px;
+}
+.priya-avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--lavender), var(--rose));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  flex-shrink: 0;
+  opacity: 0;
+  animation: scaleIn 0.6s 0.3s forwards;
+  box-shadow: 0 20px 60px rgba(107,45,91,0.2);
+}
+.priya-info { opacity: 0; animation: fadeLeft 0.6s 0.6s forwards; }
+.priya-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--plum-deep);
+  margin-bottom: 8px;
+}
+.priya-role {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  color: var(--rose);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.priya-desc {
+  font-size: 1.15rem;
+  color: #8B7A91;
+  line-height: 1.8;
+  max-width: 500px;
+}
+.priya-desc strong { color: var(--plum); }
+
+/* ===== SCENE 3-7: PROBLEM SCENES ===== */
+.problem-scene {
+  background: #1a1025;
+  text-align: center;
+}
+.time-badge {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.5s 0.2s forwards;
+}
+.problem-emoji {
+  font-size: 5rem;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: bounceIn 0.6s 0.4s forwards;
+}
+.problem-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  color: var(--white);
+  font-weight: 700;
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.6s forwards;
+}
+.problem-text {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  max-width: 600px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.8s forwards;
+}
+.stress-bar {
+  margin-top: 30px;
+  width: 300px;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeUp 0.5s 1s forwards;
+}
+.stress-fill {
+  height: 100%;
+  border-radius: 4px;
+  animation: stressFill 1.5s 1.2s forwards;
+  width: 0;
+}
+.stress-fill.low { background: var(--gold); }
+.stress-fill.med { background: var(--coral); }
+.stress-fill.high { background: var(--rose); }
+.stress-fill.max { background: linear-gradient(90deg, var(--rose), #ff3355); }
+.stress-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 8px;
+  opacity: 0;
+  animation: fadeUp 0.4s 2s forwards;
+}
+
+/* ===== SCENE 8: BREAKING POINT ===== */
+.breaking {
+  background: linear-gradient(135deg, #1a0515, #2a0a1a);
+  text-align: center;
+}
+.breaking-emoji {
+  font-size: 6rem;
+  opacity: 0;
+  animation: shakeIn 0.8s 0.3s forwards;
+}
+.breaking-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--rose);
+  font-weight: 900;
+  margin: 24px 0 16px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.8s forwards;
+}
+.breaking-text {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.8;
+  max-width: 550px;
+  opacity: 0;
+  animation: fadeUp 0.6s 1s forwards;
+}
+.app-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+  opacity: 0;
+  animation: fadeUp 0.5s 1.3s forwards;
+}
+.app-icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+/* ===== SCENE 9: DISCOVERS HER-AI ===== */
+.discover {
+  background: linear-gradient(135deg, var(--plum-deep), var(--plum));
+  text-align: center;
+}
+.discover-glow {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,168,83,0.3), transparent 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  opacity: 0;
+  animation: glowIn 1s 0.3s forwards;
+  margin-bottom: 30px;
+}
+.discover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--white);
+  font-weight: 900;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.8s forwards;
+}
+.discover-title .gold { color: var(--gold); }
+.discover-sub {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 14px;
+  opacity: 0;
+  animation: fadeUp 0.6s 1s forwards;
+}
+
+/* ===== SCENE 10-14: SOLUTION SCENES ===== */
+.solution-scene {
+  background: linear-gradient(180deg, #0d1117, #1a1025);
+  text-align: center;
+}
+.sol-time {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.5s 0.2s forwards;
+}
+.sol-emoji {
+  font-size: 5rem;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: bounceIn 0.6s 0.4s forwards;
+}
+.sol-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  color: var(--white);
+  font-weight: 700;
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.6s forwards;
+}
+.sol-title .gold { color: var(--gold); }
+.sol-title .mint { color: var(--mint); }
+.sol-text {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.8;
+  max-width: 600px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.8s forwards;
+}
+.sol-mockup {
+  margin-top: 28px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 16px 28px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--gold-light);
+  max-width: 500px;
+  text-align: left;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeUp 0.5s 1s forwards;
+}
+.sol-mockup .ai-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-bottom: 6px;
+}
+.happy-bar {
+  margin-top: 30px;
+  width: 300px;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeUp 0.5s 1s forwards;
+}
+.happy-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--mint), var(--gold));
+  border-radius: 4px;
+  width: 0;
+  animation: stressFill 1.5s 1.2s forwards;
+}
+.happy-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mint);
+  margin-top: 8px;
+  opacity: 0;
+  animation: fadeUp 0.4s 2s forwards;
+}
+
+/* ===== SCENE 15: HAPPY ENDING ===== */
+.happy {
+  background: linear-gradient(135deg, var(--plum-deep), var(--plum), #8B3A7F, var(--rose));
+  text-align: center;
+}
+.happy-avatar {
+  font-size: 5rem;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: bounceIn 0.6s 0.3s forwards;
+}
+.happy-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--white);
+  font-weight: 900;
+  margin-bottom: 14px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.6s forwards;
+}
+.happy-title .gold { color: var(--gold); }
+.happy-stats {
+  display: flex;
+  gap: 40px;
+  margin: 30px 0;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.9s forwards;
+}
+.h-stat {
+  text-align: center;
+}
+.h-stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--gold);
+}
+.h-stat-label {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+.happy-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.7);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeUp 0.6s 1.2s forwards;
+}
+
+/* ===== SCENE 16: CTA ===== */
+.cta-scene {
+  background: var(--night);
+  text-align: center;
+}
+.cta-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 900;
+  color: var(--white);
+  opacity: 0;
+  animation: fadeUp 0.8s 0.3s forwards;
+}
+.cta-logo .gold { color: var(--gold); }
+.cta-tagline {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 16px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.6s forwards;
+}
+.cta-points {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.9s forwards;
+}
+.cta-point {
+  text-align: center;
+  max-width: 180px;
+}
+.cta-point-icon { font-size: 2rem; margin-bottom: 10px; }
+.cta-point-text {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.5;
+}
+.cta-link {
+  margin-top: 40px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  color: var(--gold);
+  opacity: 0;
+  animation: fadeUp 0.5s 1.2s forwards;
+}
+
+/* ===== CONTROLS ===== */
+.controls {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+}
+.ctrl-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7);
+  padding: 8px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+.ctrl-btn:hover { background: rgba(212,168,83,0.2); border-color: var(--gold); color: var(--white); }
+.ctrl-btn.auto { background: rgba(126,206,193,0.15); border-color: rgba(126,206,193,0.3); }
+.ctrl-btn.auto.playing { background: rgba(232,82,111,0.15); border-color: rgba(232,82,111,0.3); }
+
+.scene-counter {
+  position: fixed;
+  bottom: 28px;
+  right: 40px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+  z-index: 100;
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--rose));
+  z-index: 200;
+  transition: width 0.5s ease;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes bounceIn {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes shakeIn {
+  0% { opacity: 0; transform: scale(0.5) rotate(-10deg); }
+  40% { opacity: 1; transform: scale(1.05) rotate(3deg); }
+  60% { transform: scale(0.98) rotate(-2deg); }
+  80% { transform: scale(1.01) rotate(1deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+@keyframes glowIn {
+  0% { opacity: 0; transform: scale(0.3); box-shadow: 0 0 0 rgba(212,168,83,0); }
+  100% { opacity: 1; transform: scale(1); box-shadow: 0 0 80px rgba(212,168,83,0.3); }
+}
+@keyframes stressFill {
+  to { width: var(--fill); }
+}
+
+@media (max-width: 768px) {
+  .scene { padding: 30px 20px; }
+  .priya-card { flex-direction: column; gap: 24px; text-align: center; }
+  .priya-avatar { width: 130px; height: 130px; font-size: 3.5rem; }
+  .priya-name { font-size: 2rem; }
+  .priya-desc { font-size: 0.95rem; }
+  .happy-stats { gap: 20px; flex-wrap: wrap; justify-content: center; }
+  .cta-points { flex-wrap: wrap; justify-content: center; gap: 20px; }
+  .app-icons { flex-wrap: wrap; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="scene-counter" id="sceneCounter">1 / 14</div>
+
+<div class="controls">
+  <button class="ctrl-btn" onclick="prev()">&#8592; Back</button>
+  <button class="ctrl-btn auto" id="autoBtn" onclick="toggleAuto()">&#9654; Auto Play</button>
+  <button class="ctrl-btn" onclick="next()">Next &#8594;</button>
+</div>
+
+<!-- SCENE 1: INTRO -->
+<div class="scene sc1 active" id="s1">
+  <div class="sc1-badge">A Story of Transformation</div>
+  <h1 class="sc1-title">HER<span class="gold">-AI</span></h1>
+  <p class="sc1-sub">One woman. Eight problems. One solution.</p>
+</div>
+
+<!-- SCENE 2: MEET PRIYA -->
+<div class="scene sc2" id="s2">
+  <div class="priya-card">
+    <div class="priya-avatar">👩‍💼</div>
+    <div class="priya-info">
+      <div class="priya-name">Meet Priya</div>
+      <div class="priya-role">Marketing Manager, Age 28</div>
+      <div class="priya-desc">
+        She's ambitious, hardworking, manages a team of 12.<br><br>
+        But behind the confidence, she's <strong>drowning in chaos</strong> &mdash; juggling career, home, health, finances, and personal growth across <strong>6 disconnected apps</strong>.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCENE 3: MORNING PROBLEM -->
+<div class="scene problem-scene" id="s3">
+  <div class="time-badge">7:00 AM &mdash; Morning</div>
+  <div class="problem-emoji">😫</div>
+  <div class="problem-title">Wakes Up Exhausted</div>
+  <div class="problem-text">Opens 3 apps &mdash; to-do list, calendar, period tracker. Nothing connects. She's in her Luteal phase but doesn't know she should go easy today. Starts planning a heavy day.</div>
+  <div class="stress-bar"><div class="stress-fill low" style="--fill: 30%"></div></div>
+  <div class="stress-label" style="color: var(--gold);">Stress Level: Rising</div>
+</div>
+
+<!-- SCENE 4: OFFICE PROBLEM -->
+<div class="scene problem-scene" id="s4">
+  <div class="time-badge">9:30 AM &mdash; Office</div>
+  <div class="problem-emoji">📧</div>
+  <div class="problem-title">Struggling with an Email</div>
+  <div class="problem-text">Boss needs a confident email to a difficult client. She writes 4 drafts &mdash; too soft, too aggressive, too long, too vague. Wastes 40 minutes. Sends it anyway, unsure.</div>
+  <div class="stress-bar"><div class="stress-fill med" style="--fill: 50%"></div></div>
+  <div class="stress-label" style="color: var(--coral);">Stress Level: Growing</div>
+</div>
+
+<!-- SCENE 5: STORE PROBLEM -->
+<div class="scene problem-scene" id="s5">
+  <div class="time-badge">1:00 PM &mdash; Lunch Break</div>
+  <div class="problem-emoji">🛒</div>
+  <div class="problem-title">Forgot the Groceries. Again.</div>
+  <div class="problem-text">Walks past the supermarket every single day. The milk, eggs, and bread are still not bought. She only remembers when she's already home. Every. Single. Time.</div>
+  <div class="stress-bar"><div class="stress-fill med" style="--fill: 65%"></div></div>
+  <div class="stress-label" style="color: var(--coral);">Stress Level: Frustrating</div>
+</div>
+
+<!-- SCENE 6: LEARNING PROBLEM -->
+<div class="scene problem-scene" id="s6">
+  <div class="time-badge">6:00 PM &mdash; Evening</div>
+  <div class="problem-emoji">📚</div>
+  <div class="problem-title">Wants to Learn, Can't Focus</div>
+  <div class="problem-text">Appraisal is next month. She needs negotiation skills. Googles random articles, watches half a YouTube video, gets distracted. No structure, no progress. Gives up in 10 minutes.</div>
+  <div class="stress-bar"><div class="stress-fill high" style="--fill: 78%"></div></div>
+  <div class="stress-label" style="color: var(--rose);">Stress Level: High</div>
+</div>
+
+<!-- SCENE 7: FINANCE PROBLEM -->
+<div class="scene problem-scene" id="s7">
+  <div class="time-badge">9:00 PM &mdash; Night</div>
+  <div class="problem-emoji">💸</div>
+  <div class="problem-title">Where Did the Money Go?</div>
+  <div class="problem-text">Salary came 20 days ago. Account shows ₹4,200 left. She has no idea where ₹35,800 went. Opens a budget app she forgot the password to. Gives up. Feels guilty.</div>
+  <div class="stress-bar"><div class="stress-fill max" style="--fill: 92%"></div></div>
+  <div class="stress-label" style="color: #ff4466;">Stress Level: Overwhelmed</div>
+</div>
+
+<!-- SCENE 8: BREAKING POINT -->
+<div class="scene breaking" id="s8">
+  <div class="breaking-emoji">😰</div>
+  <div class="breaking-title">The Breaking Point</div>
+  <div class="breaking-text">"I have 6 apps. None of them talk to each other. None of them understand MY life. I'm organized at work but falling apart everywhere else."</div>
+  <div class="app-icons">
+    <div class="app-icon-box">📋</div>
+    <div class="app-icon-box">📅</div>
+    <div class="app-icon-box">💰</div>
+    <div class="app-icon-box">🏥</div>
+    <div class="app-icon-box">📚</div>
+    <div class="app-icon-box">📝</div>
+  </div>
+</div>
+
+<!-- SCENE 9: DISCOVERS HER-AI -->
+<div class="scene discover" id="s9">
+  <div class="discover-glow">✦</div>
+  <div class="discover-title">Then She Found <span class="gold">HER-AI</span></div>
+  <div class="discover-sub">One AI brain. Eight life dimensions. Everything connected.</div>
+</div>
+
+<!-- SCENE 10: SOLUTION - MORNING -->
+<div class="scene solution-scene" id="s10">
+  <div class="sol-time">7:00 AM &mdash; With HER-AI</div>
+  <div class="sol-emoji">🌅</div>
+  <div class="sol-title">Wakes Up. <span class="gold">Dashboard Knows.</span></div>
+  <div class="sol-text">HER-AI detects her Luteal phase. Dashboard shows: "Low energy today. Focus on 2 easy tasks. Defer the report to Thursday."</div>
+  <div class="sol-mockup">
+    <div class="ai-label">HER-AI Dashboard</div>
+    ⚡ Energy: Low &nbsp;|&nbsp; 🌙 Phase: Luteal &nbsp;|&nbsp; ✅ 2 tasks recommended<br>
+    💡 "Take it easy today. Your energy peaks again on Friday."
+  </div>
+</div>
+
+<!-- SCENE 11: SOLUTION - EMAIL -->
+<div class="scene solution-scene" id="s11">
+  <div class="sol-time">9:30 AM &mdash; With HER-AI</div>
+  <div class="sol-emoji">✉️</div>
+  <div class="sol-title">Email Rewritten in <span class="mint">3 Seconds</span></div>
+  <div class="sol-text">Pastes her rough draft into AI Email Rewriter. Selects "Confident & Professional" tone. Gets a polished email instantly. Sends it. Done.</div>
+  <div class="sol-mockup">
+    <div class="ai-label">AI Email Rewriter</div>
+    <strong>Before:</strong> "Hi, I was wondering if maybe we could discuss the timeline?"<br>
+    <strong>After:</strong> "Hi Rahul, I'd like to align on the revised timeline. Let's connect Thursday at 2 PM to finalize deliverables."
+  </div>
+</div>
+
+<!-- SCENE 12: SOLUTION - GEO -->
+<div class="scene solution-scene" id="s12">
+  <div class="sol-time">1:00 PM &mdash; With HER-AI</div>
+  <div class="sol-emoji">📍</div>
+  <div class="sol-title">Phone Buzzes: <span class="gold">"You're Near Fresh Mart!"</span></div>
+  <div class="sol-text">GPS detects she's 200 meters from the store. HER-AI alerts: "Don't forget: Milk, Eggs, Bread." She walks in. 5 minutes. Done. Never forgets again.</div>
+  <div class="happy-bar"><div class="happy-fill" style="--fill: 60%"></div></div>
+  <div class="happy-label">Confidence: Building</div>
+</div>
+
+<!-- SCENE 13: SOLUTION - LEARNING -->
+<div class="scene solution-scene" id="s13">
+  <div class="sol-time">6:00 PM &mdash; With HER-AI</div>
+  <div class="sol-emoji">🎓</div>
+  <div class="sol-title">AI Instructor: <span class="mint">Week 2, Lesson 3</span></div>
+  <div class="sol-text">Opens Negotiation Course. AI instructor teaches anchoring techniques, gives practice scenarios, tracks her progress. Structured. 15 minutes/day. She's actually learning.</div>
+  <div class="sol-mockup">
+    <div class="ai-label">AI Learning Module</div>
+    📖 Negotiation Mastery &mdash; Week 2<br>
+    Today: "The Power of Anchoring" &nbsp;|&nbsp; Progress: 35%<br>
+    🎯 Practice: "Your client says ₹50K. Counter with..."
+  </div>
+</div>
+
+<!-- SCENE 14: SOLUTION - FINANCE -->
+<div class="scene solution-scene" id="s14">
+  <div class="sol-time">9:00 PM &mdash; With HER-AI</div>
+  <div class="sol-emoji">💰</div>
+  <div class="sol-title">Every Rupee. <span class="gold">Tracked.</span></div>
+  <div class="sol-text">Opens Finance module. Sees: "Food: ₹4,200 (68% of budget). Transport: ₹2,100. Shopping: ₹3,400." Clear picture in 5 seconds. Logs her mood. Sleeps peacefully.</div>
+  <div class="happy-bar"><div class="happy-fill" style="--fill: 85%"></div></div>
+  <div class="happy-label">Peace of Mind: Restored</div>
+</div>
+
+<!-- SCENE 15: HAPPY ENDING -->
+<div class="scene happy" id="s15">
+  <div class="happy-avatar">😊</div>
+  <div class="happy-title">Priya Is <span class="gold">In Control</span> Now</div>
+  <div class="happy-stats">
+    <div class="h-stat"><div class="h-stat-num">1</div><div class="h-stat-label">App Instead of 6</div></div>
+    <div class="h-stat"><div class="h-stat-num">8</div><div class="h-stat-label">Life Areas Managed</div></div>
+    <div class="h-stat"><div class="h-stat-num">0</div><div class="h-stat-label">Missed Groceries</div></div>
+    <div class="h-stat"><div class="h-stat-num">100%</div><div class="h-stat-label">In Control</div></div>
+  </div>
+  <div class="happy-quote">"I finally have an app that understands me &mdash; my energy, my cycle, my career, my life. Everything in one place. I'm not stressed anymore."</div>
+</div>
+
+<!-- SCENE 16: CTA -->
+<div class="scene cta-scene" id="s16">
+  <div class="cta-logo">HER<span class="gold">-AI</span></div>
+  <div class="cta-tagline">The Life Operating System for Women</div>
+  <div class="cta-points">
+    <div class="cta-point">
+      <div class="cta-point-icon">🧠</div>
+      <div class="cta-point-text">Powered by AI that understands HER</div>
+    </div>
+    <div class="cta-point">
+      <div class="cta-point-icon">⚡</div>
+      <div class="cta-point-text">Built with just 2 prompts in Cursor IDE</div>
+    </div>
+    <div class="cta-point">
+      <div class="cta-point-icon">🌍</div>
+      <div class="cta-point-text">Runs on any device, no installation needed</div>
+    </div>
+  </div>
+  <div class="cta-link">DESIGNED FOR EVERY WOMAN, NOT JUST DEVELOPERS</div>
+</div>
+
+<script>
+var current = 1;
+var total = 16;
+var autoInterval = null;
+
+function show(n) {
+  document.querySelectorAll('.scene').forEach(function(s) {
+    s.classList.remove('active');
+    s.querySelectorAll('[style*="animation"]').forEach(function(el) {
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = '';
+    });
+  });
+  var el = document.getElementById('s' + n);
+  if (el) {
+    el.offsetHeight;
+    el.classList.add('active');
+  }
+  document.getElementById('sceneCounter').textContent = n + ' / ' + total;
+  document.getElementById('progressBar').style.width = ((n / total) * 100) + '%';
+}
+
+function next() {
+  if (current < total) { current++; show(current); }
+}
+function prev() {
+  if (current > 1) { current--; show(current); }
+}
+
+function toggleAuto() {
+  var btn = document.getElementById('autoBtn');
+  if (autoInterval) {
+    clearInterval(autoInterval);
+    autoInterval = null;
+    btn.textContent = '\u25B6 Auto Play';
+    btn.classList.remove('playing');
+  } else {
+    btn.textContent = '\u25A0 Stop';
+    btn.classList.add('playing');
+    autoInterval = setInterval(function() {
+      if (current < total) { next(); }
+      else { toggleAuto(); }
+    }, 5000);
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+});
+</script>
+</body>
+</html>
