@@ -562,7 +562,7 @@ html, body { height: 100%; overflow: hidden; background: var(--night); font-fami
 <body>
 
 <div class="progress-bar" id="progressBar"></div>
-<div class="scene-counter" id="sceneCounter">1 / 14</div>
+<div class="scene-counter" id="sceneCounter">1 / 22</div>
 
 <div class="controls">
   <button class="ctrl-btn" onclick="prev()">&#8592; Back</button>
@@ -727,7 +727,7 @@ html, body { height: 100%; overflow: hidden; background: var(--night); font-fami
 <!-- SCENE 15: HAPPY ENDING -->
 <div class="scene happy" id="s15">
   <div class="happy-avatar">😊</div>
-  <div class="happy-title">Priya Is <span class="gold">In Control</span> Now</div>
+  <div class="happy-title">Priya Runs Her Life Like a <span class="gold">CEO</span></div>
   <div class="happy-stats">
     <div class="h-stat"><div class="h-stat-num">1</div><div class="h-stat-label">App Instead of 6</div></div>
     <div class="h-stat"><div class="h-stat-num">8</div><div class="h-stat-label">Life Areas Managed</div></div>
@@ -737,30 +737,109 @@ html, body { height: 100%; overflow: hidden; background: var(--night); font-fami
   <div class="happy-quote">"I finally have an app that understands me &mdash; my energy, my cycle, my career, my life. Everything in one place. I'm not stressed anymore."</div>
 </div>
 
-<!-- SCENE 16: CTA -->
-<div class="scene cta-scene" id="s16">
+<!-- SCENE 16: BUILD STORY - INTRO -->
+<div class="scene discover" id="s16">
+  <div class="discover-glow">🛠️</div>
+  <div class="discover-title">But How Did We <span class="gold">Build</span> This?</div>
+  <div class="discover-sub">Not in months. Not with a team. Here's the real story.</div>
+</div>
+
+<!-- SCENE 17: STEP 1 - CURSOR -->
+<div class="scene solution-scene" id="s17">
+  <div class="sol-time">Step 1</div>
+  <div class="sol-emoji">💻</div>
+  <div class="sol-title">Opened <span class="gold">Cursor IDE</span></div>
+  <div class="sol-text">A free AI-powered code editor. No setup, no configuration. Just download, open, and start talking to AI.</div>
+  <div class="sol-mockup">
+    <div class="ai-label">What is Cursor?</div>
+    A code editor with built-in AI assistant.<br>
+    You describe what you want in plain English &mdash; AI writes the code for you.
+  </div>
+</div>
+
+<!-- SCENE 18: STEP 2 - PROMPT 1 -->
+<div class="scene solution-scene" id="s18">
+  <div class="sol-time">Step 2</div>
+  <div class="sol-emoji">📝</div>
+  <div class="sol-title">Pasted <span class="gold">Prompt 1</span></div>
+  <div class="sol-text">One detailed prompt describing the entire application &mdash; 8 modules, landing page, dashboard, AI chat, design system. Hit Enter.</div>
+  <div class="sol-mockup">
+    <div class="ai-label">Prompt 1 &mdash; The Foundation</div>
+    "Build a complete Life Operating System for women called HER-AI with 8 modules: Productivity, Scheduler, Learning, Home, Finance, Leadership, Branding, Wellness..."<br><br>
+    <strong>Result:</strong> 20+ files generated. Full application ready.
+  </div>
+</div>
+
+<!-- SCENE 19: STEP 3 - PROMPT 2 -->
+<div class="scene solution-scene" id="s19">
+  <div class="sol-time">Step 3</div>
+  <div class="sol-emoji">🧠</div>
+  <div class="sol-title">Pasted <span class="mint">Prompt 2</span></div>
+  <div class="sol-text">Second prompt added the intelligence layer &mdash; personalized AI, energy-based tasks, real GPS reminders, cycle-aware scheduling, responsive design for all screens.</div>
+  <div class="sol-mockup">
+    <div class="ai-label">Prompt 2 &mdash; Intelligence Layer</div>
+    "Add energy-based task management, real GPS geo-reminders, personalized AI chat using live user data, responsive for all screens..."<br><br>
+    <strong>Result:</strong> AI now knows your tasks, mood, budget, energy, and cycle.
+  </div>
+</div>
+
+<!-- SCENE 20: STEP 4 - API KEY -->
+<div class="scene solution-scene" id="s20">
+  <div class="sol-time">Step 4</div>
+  <div class="sol-emoji">🔑</div>
+  <div class="sol-title">Added <span class="gold">Groq API Key</span></div>
+  <div class="sol-text">Got a free API key from groq.com in 30 seconds. Pasted it in Settings. The AI brain came alive &mdash; real LLM responses, personalized to your data.</div>
+  <div class="sol-mockup">
+    <div class="ai-label">Settings &rarr; API Key</div>
+    Groq API Key: gsk_xxxxx...<br>
+    Model: LLaMA 3.3 70B Versatile<br>
+    Cost: <strong>FREE</strong> &nbsp;|&nbsp; Speed: <strong>Instant</strong>
+  </div>
+</div>
+
+<!-- SCENE 21: STEP 5 - DEPLOYED -->
+<div class="scene solution-scene" id="s21">
+  <div class="sol-time">Step 5</div>
+  <div class="sol-emoji">🚀</div>
+  <div class="sol-title">Pushed to GitHub. <span class="mint">Live.</span></div>
+  <div class="sol-text">Uploaded to GitHub, enabled GitHub Pages. Application is now live on the internet. Anyone can open the link and use it. No server, no database, no hosting cost.</div>
+  <div class="sol-mockup">
+    <div class="ai-label">Deployment</div>
+    🌐 gayatri-kharat.github.io/HER-AI<br>
+    ✅ Live &nbsp;|&nbsp; ✅ Free &nbsp;|&nbsp; ✅ Works on any device
+  </div>
+  <div class="happy-bar"><div class="happy-fill" style="--fill: 100%"></div></div>
+  <div class="happy-label">Application: Ready to Use</div>
+</div>
+
+<!-- SCENE 22: FINAL CTA -->
+<div class="scene cta-scene" id="s22">
   <div class="cta-logo">HER<span class="gold">-AI</span></div>
-  <div class="cta-tagline">The Life Operating System for Women</div>
+  <div class="cta-tagline">2 Prompts. 5 Steps. A Complete Life Operating System.</div>
   <div class="cta-points">
     <div class="cta-point">
-      <div class="cta-point-icon">🧠</div>
-      <div class="cta-point-text">Powered by AI that understands HER</div>
+      <div class="cta-point-icon">💻</div>
+      <div class="cta-point-text">Open Cursor IDE</div>
     </div>
     <div class="cta-point">
-      <div class="cta-point-icon">⚡</div>
-      <div class="cta-point-text">Built with just 2 prompts in Cursor IDE</div>
+      <div class="cta-point-icon">📝</div>
+      <div class="cta-point-text">Paste 2 Prompts</div>
     </div>
     <div class="cta-point">
-      <div class="cta-point-icon">🌍</div>
-      <div class="cta-point-text">Runs on any device, no installation needed</div>
+      <div class="cta-point-icon">🔑</div>
+      <div class="cta-point-text">Add API Key</div>
+    </div>
+    <div class="cta-point">
+      <div class="cta-point-icon">🚀</div>
+      <div class="cta-point-text">Deploy &amp; Share</div>
     </div>
   </div>
-  <div class="cta-link">DESIGNED FOR EVERY WOMAN, NOT JUST DEVELOPERS</div>
+  <div class="cta-link">ANYONE CAN BUILD THIS. NO CODING NEEDED.</div>
 </div>
 
 <script>
 var current = 1;
-var total = 16;
+var total = 22;
 var autoInterval = null;
 
 function show(n) {
