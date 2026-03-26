@@ -244,8 +244,7 @@ body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(-
 }
 
 .prompt-step:nth-child(1) .prompt-step-number { background: var(--gold); }
-.prompt-step:nth-child(2) .prompt-step-number { background: var(--plum); }
-.prompt-step:nth-child(3) .prompt-step-number { background: var(--rose); }
+.prompt-step:nth-child(2) .prompt-step-number { background: var(--mint); }
 
 .prompt-card {
   background: white;
@@ -283,7 +282,12 @@ body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(-
   margin-bottom: 1rem;
   line-height: 1.6;
   border-left: 3px solid var(--gold);
+  white-space: pre-wrap;
+  max-height: 400px;
+  overflow-y: auto;
 }
+.prompt-text::-webkit-scrollbar { width: 4px; }
+.prompt-text::-webkit-scrollbar-thumb { background: rgba(212,168,83,0.3); border-radius: 2px; }
 
 .prompt-result {
   font-size: 0.88rem;
@@ -530,6 +534,36 @@ body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(-
 
 .no-dep-tag.yes { background: rgba(126,206,193,0.15); color: #2A8A7A; }
 
+/* ========== COPY BUTTON ========== */
+.copy-prompt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 28px;
+  border: 2px solid var(--gold);
+  background: rgba(212,168,83,0.1);
+  color: var(--gold);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.copy-prompt-btn:hover {
+  background: var(--gold);
+  color: var(--plum-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212,168,83,0.3);
+}
+.copy-prompt-btn.copied {
+  background: var(--mint);
+  border-color: var(--mint);
+  color: var(--plum-deep);
+}
+
 /* ========== PAGE FOOTER ========== */
 .footer {
   text-align: center;
@@ -562,24 +596,87 @@ body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(-
 <!-- HERO -->
 <section class="page-hero">
   <h1>How We <span class="accent">Built</span> HER-AI</h1>
-  <p>An entire Life Operating System created with just 3 AI prompts. No months of coding. No complex tools. Here's exactly how we did it &mdash; and how you can run it on your laptop in under 2 minutes.</p>
+  <p>An entire Life Operating System created with just <strong>2 AI prompts</strong> and <strong>5 simple steps</strong>. No Python. No frameworks. Just vanilla HTML, CSS &amp; JavaScript in Cursor IDE &mdash; and you'll have the exact same app + any extra features you want.</p>
 </section>
 
 <!-- CONTENT -->
 <div class="content">
 
-  <!-- PART 1: THE 3 PROMPTS -->
-  <span class="section-label">Development Process</span>
-  <h2 class="section-title">Built with 3 Prompts. That's It.</h2>
-  <p class="section-sub">We used Cursor IDE (an AI-powered code editor) to build the entire system through just 3 strategic prompts &mdash; proving that powerful apps can be created rapidly by anyone.</p>
+  <!-- THE 5-STEP PROCESS (matches story) -->
+  <span class="section-label">2 Prompts &bull; 5 Steps</span>
+  <h2 class="section-title">Build HER-AI Yourself. Here's Exactly How.</h2>
+  <p class="section-sub">We spent 5 days to build HER-AI &mdash; but we don't want you to spend more than 5 minutes. Follow these 5 steps and you'll have the exact same app.</p>
 
+  <!-- STEP 1: CURSOR -->
+  <div class="steps-container">
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">Step 1</span>
+        <span class="step-title">💻 Open Cursor IDE</span>
+      </div>
+      <div class="step-body">
+        <p>Download Cursor &mdash; a free AI-powered code editor:</p>
+        <div class="step-link">
+          <a href="https://www.cursor.com/downloads" target="_blank" style="color:var(--plum);font-weight:600;text-decoration:underline;">cursor.com/downloads</a>
+        </div>
+        <p>Install it, create a new empty folder (e.g. <strong>"HER-AI"</strong>), and open that folder in Cursor.</p>
+        <p>You describe what you want in plain English &mdash; AI writes the code for you. No coding skills needed.</p>
+        <div class="step-code">Tech Stack: ✅ HTML  ✅ CSS  ✅ JavaScript
+No Python  |  No npm  |  No build tools</div>
+      </div>
+    </div>
+
+    <div class="step-arrow">↓</div>
+
+    <!-- STEP 2: PROMPT 1 -->
+    <div class="step-card step-card-alt">
+      <div class="step-header">
+        <span class="step-num">Step 2</span>
+        <span class="step-title">📝 Paste Prompt 1 — The Foundation</span>
+      </div>
+      <div class="step-body">
+        <p>Open the AI chat panel in Cursor (<strong>Ctrl+L</strong>). Copy the prompt below and paste it. Hit Enter.</p>
+        <p>Cursor will generate <strong>all 20+ files</strong> &mdash; landing page, dashboard, all 8 modules, AI engine, CSS design system, everything. Accept all files.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT 1 FULL TEXT -->
   <div class="prompt-timeline">
     <div class="prompt-step">
       <div class="prompt-step-number">1</div>
       <div class="prompt-card">
         <div class="prompt-label">Prompt 1 &mdash; The Foundation</div>
-        <div class="prompt-title">Design the full Life Operating System</div>
-        <div class="prompt-text">"Build a complete Life Operating System for women called HER-AI with 8 modules: Productivity (energy-based task management), Smart Scheduler (cycle-aware planning), Learning (AI instructor with courses), Home Life (grocery, meals, geo-reminders), Finance (budgeting &amp; tracking), Leadership (email rewriting, negotiation), Branding (LinkedIn, pitches), and Wellness (mood, sleep, cycle tracking). Use vanilla HTML/CSS/JS, no frameworks. Include a landing page and a dashboard app. Use Groq LLM with rule-based fallback."</div>
+        <div class="prompt-title">Build the complete Life Operating System</div>
+        <div class="prompt-text" id="prompt1-display">Build a complete Life Operating System for women called "HER-AI" with 8 modules: Productivity (energy-based task management), Smart Scheduler (cycle-aware planning), Learning (AI instructor with courses), Home Life (grocery, meals, geo-reminders), Finance (budgeting &amp; tracking), Leadership (email rewriting, negotiation), Branding (LinkedIn, pitches), and Wellness (mood, sleep, cycle tracking). Use vanilla HTML/CSS/JS, no frameworks. Include a landing page and a dashboard app. Use Groq LLM with rule-based fallback.
+
+Create these files:
+
+1. index.html — Landing page with full-screen hero (plum-to-rose gradient, floating particles), 8 theme cards grid, stats strip, cycle awareness section with animated ring, 3 feature deep-dives, navbar with mobile hamburger, scroll animations using IntersectionObserver.
+
+2. app.html — Dashboard app with fixed sidebar (240px, dark plum), sticky topbar with cycle/energy indicators, and these pages:
+• Dashboard: stat cards, schedule timeline, AI suggestions, quick actions, mood mini tracker
+• Productivity: energy selector (High/Med/Low), task list with add/delete/complete, priority badges
+• Smart Scheduler: weekly view, auto-schedule by priority + energy, workload bar
+• Learning: 4 course cards with progress bars, AI instructor chat per course
+• Home Life: tabs for Groceries (CRUD list), Meals (weekly planner), Geo-Reminders (location-based alerts)
+• Finance: budget setting, spending by category with progress bars, expense tracking
+• Leadership: AI email rewriter, negotiation script generator, meeting prep
+• Wellness: mood logger (emoji buttons), sleep tracker, cycle tracker with phase calculation
+• AI Chat: conversational chat with user/AI bubbles, typing indicator
+• Settings: API key, name, theme toggle
+
+3. app.css — Full design system with light/dark themes using CSS variables. Colors: plum #6B2D5B, rose #E8526F, gold #D4A853, mint #7ECEC1. Fonts: Playfair Display, DM Sans, Syne.
+
+4. app.js + module files — State management with localStorage, Router for page switching, all module logic split into separate files (app.state.js, app.router.js, app.dashboard.js, app.productivity.js, app.scheduler.js, app.learning.js, app.home.js, app.finance.js, app.leadership.js, app.wellness.js, app.branding.js, app.ui.js, app.init.js, app.settings.js, app.ai-chat.js).
+
+5. app.ai-engine.js — Hybrid AI: Groq API (LLaMA 3.3 70B) with rule-based fallback. chat() for keyword matching, chatLLM() for real AI responses.
+
+6. config.example.js — Example API key config.
+7. architecture.html — Dark-themed tech architecture page showing system layers.</div>
+        <div style="text-align:center;margin:1rem 0 0.5rem;">
+          <button class="copy-prompt-btn" onclick="copyPrompt('prompt1')">📋 Copy Prompt 1</button>
+        </div>
         <div class="prompt-result">
           <strong>Output:</strong> Complete app with all 8 modules, landing page with animations, dashboard with AI insights, hybrid AI engine, full CSS design system with light/dark themes.
         </div>
@@ -593,173 +690,114 @@ body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(-
         </div>
       </div>
     </div>
+  </div>
 
+  <!-- STEP 3: PROMPT 2 -->
+  <div class="steps-container">
+    <div class="step-card step-card-highlight">
+      <div class="step-header">
+        <span class="step-num">Step 3</span>
+        <span class="step-title">🧠 Paste Prompt 2 — Intelligence Layer</span>
+      </div>
+      <div class="step-body">
+        <p>Now paste the second prompt into Cursor's chat. This adds the smart features &mdash; personalized AI, energy-aware tasks, real GPS reminders, responsive design.</p>
+        <p>Cursor will enhance the existing app. Accept all changes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROMPT 2 FULL TEXT -->
+  <div class="prompt-timeline">
     <div class="prompt-step">
       <div class="prompt-step-number">2</div>
       <div class="prompt-card">
         <div class="prompt-label">Prompt 2 &mdash; Intelligence Layer</div>
         <div class="prompt-title">Make the AI contextual and personalized</div>
-        <div class="prompt-text">"Connect the AI chat to live user data &mdash; tasks, budget, moods, energy level, cycle phase, schedule. The AI should give specific answers based on actual data, not generic advice. Add energy-based task highlighting (recommended vs defer). Fix geo-reminders to use real browser geolocation with OpenStreetMap reverse geocoding instead of random simulation."</div>
+        <div class="prompt-text" id="prompt2-display">Enhance the HER-AI application with these improvements:
+
+1. RESPONSIVE DESIGN — Add comprehensive responsive CSS for all screen sizes. 3 breakpoints: 1024px (tablet), 768px (mobile: sidebar off-screen, grids single-column, chat adapts), 480px (compact everything, hide greeting, shrink badges). Sidebar should have an overlay that closes it when tapped.
+
+2. ENERGY-BASED TASK UI — When user selects energy level in Productivity: High energy = high-priority tasks get green border + "⚡ Do now" badge, low-priority get dimmed + "💤 Defer". Medium energy = medium tasks highlighted. Low energy = low tasks recommended. Both Productivity and Dashboard update immediately.
+
+3. REAL GEO-REMINDERS — Replace simulated geo with real browser geolocation. Use navigator.geolocation.getCurrentPosition() + fetch to https://nominatim.openstreetmap.org/reverse for reverse geocoding. Match nearby locations against stored geo-reminder categories. Add snooze to prevent re-triggering. Check every 3 minutes.
+
+4. PERSONALIZED AI CHAT — In chatLLM(), build rich context by checking message keywords and injecting relevant live data: tasks + priorities for task queries, budget + expenses for finance queries, moods + sleep for wellness queries, schedule for planning queries, cycle phase for health queries. The LLM should answer based on ACTUAL user data, not generic advice.
+
+5. AI ERROR HANDLING — If chatLLM fails, show clear error: "Could not reach AI service. Check your API key in Settings." Never silently fall back.
+
+6. CSS SAFETY — Add img, video, svg max-width:100%. Use minmax(min(Xpx, 100%), 1fr) in all grids. overflow-x: hidden on html/body. word-break: break-word on long text.</div>
+        <div style="text-align:center;margin:1rem 0 0.5rem;">
+          <button class="copy-prompt-btn" onclick="copyPrompt('prompt2')">📋 Copy Prompt 2</button>
+        </div>
         <div class="prompt-result">
-          <strong>Output:</strong> Personalized AI responses using real data, energy-adaptive task UI with visual indicators, real GPS-based geo-reminders matching store categories.
+          <strong>Output:</strong> Personalized AI responses using real data, energy-adaptive task UI with visual indicators, real GPS-based geo-reminders, fully responsive on all screens.
         </div>
         <div class="prompt-output-tags">
           <span class="prompt-output-tag">Live Data Context</span>
           <span class="prompt-output-tag">Energy UI</span>
           <span class="prompt-output-tag">Real Geolocation</span>
+          <span class="prompt-output-tag">Responsive</span>
           <span class="prompt-output-tag">Smart Fallbacks</span>
         </div>
       </div>
     </div>
-
-    <div class="prompt-step">
-      <div class="prompt-step-number">3</div>
-      <div class="prompt-card">
-        <div class="prompt-label">Prompt 3 &mdash; Polish &amp; Deploy</div>
-        <div class="prompt-title">Make it production-ready and shareable</div>
-        <div class="prompt-text">"Set up the project for deployment &mdash; add GitHub repo, push all code, write a comprehensive README, configure auto-launch with VS Code tasks so pressing F5 starts the server and opens the browser automatically. Add architecture documentation and a presentation page."</div>
-        <div class="prompt-result">
-          <strong>Output:</strong> GitHub-hosted repo, one-click launch, full README with setup instructions, architecture docs, presentation page.
-        </div>
-        <div class="prompt-output-tags">
-          <span class="prompt-output-tag">GitHub Repo</span>
-          <span class="prompt-output-tag">One-Click Launch</span>
-          <span class="prompt-output-tag">README</span>
-          <span class="prompt-output-tag">Auto Server</span>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <!-- DIVIDER -->
-  <div class="section-divider"></div>
-
-  <!-- PART 2: SETUP GUIDE -->
-  <span class="section-label">Quick Setup</span>
-  <h2 class="section-title">Get HER-AI Running on Your Laptop</h2>
-  <p class="section-sub">No technical background needed. Follow these simple steps and you'll be up and running in under 2 minutes. Everything is free.</p>
-
-  <h4 class="tools-heading">What You'll Need (All Free)</h4>
-  <div class="tools-grid">
-    <div class="tool-card">
-      <div class="tool-icon">🌐</div>
-      <div class="tool-name">A Web Browser</div>
-      <div class="tool-desc">Google Chrome, Edge, or Firefox &mdash; you already have one on your laptop!</div>
-      <div class="tool-tag free">Already on your laptop</div>
-    </div>
-    <div class="tool-card">
-      <div class="tool-icon">🐍</div>
-      <div class="tool-name">Python</div>
-      <div class="tool-desc">A small free program. We only use it to open the app &mdash; you don't need to learn Python!</div>
-      <div class="tool-tag free">Free download</div>
-    </div>
-    <div class="tool-card">
-      <div class="tool-icon">📁</div>
-      <div class="tool-name">The HER-AI Files</div>
-      <div class="tool-desc">Download as a ZIP file from GitHub &mdash; just like downloading any file from the internet.</div>
-      <div class="tool-tag free">Free download</div>
-    </div>
-    <div class="tool-card">
-      <div class="tool-icon">🤖</div>
-      <div class="tool-name">AI Key (Optional)</div>
-      <div class="tool-desc">Want smarter AI responses? Get a free key from Groq. The app works great without it too!</div>
-      <div class="tool-tag optional">Optional</div>
-    </div>
-  </div>
-
-  <h4 class="tools-heading">Follow These Steps</h4>
+  <!-- STEP 4: API KEY -->
   <div class="steps-container">
-    <div class="step-card">
-      <div class="step-header">
-        <span class="step-num">Step 1</span>
-        <span class="step-title">Download the App</span>
-      </div>
-      <div class="step-body">
-        <p>Go to the project page and click the green <strong>"Code"</strong> button, then click <strong>"Download ZIP"</strong>:</p>
-        <div class="step-link">
-          <a href="https://github.com/Gayatri-Kharat/HER-AI" target="_blank" style="color:var(--plum);font-weight:600;text-decoration:underline;">github.com/Gayatri-Kharat/HER-AI</a>
-        </div>
-        <p>Once downloaded, <strong>right-click the ZIP file</strong> and choose <strong>"Extract All"</strong>. Open the extracted folder.</p>
-        <p class="step-alt">It's just like downloading and unzipping any file from the internet!</p>
-      </div>
-    </div>
-
-    <div class="step-arrow">↓</div>
-
-    <div class="step-card">
-      <div class="step-header">
-        <span class="step-num">Step 2</span>
-        <span class="step-title">Install Python (One-Time Only)</span>
-      </div>
-      <div class="step-body">
-        <p>If you don't have Python yet, download it for free:</p>
-        <div class="step-link">
-          <a href="https://www.python.org/downloads/" target="_blank" style="color:var(--plum);font-weight:600;text-decoration:underline;">python.org/downloads</a>
-        </div>
-        <p>Click <strong>"Download Python"</strong> and run the installer. <strong style="color:var(--rose);">Important: Check the box that says "Add Python to PATH"</strong> before clicking Install.</p>
-        <p class="step-alt">You only need to do this once. After that, Python is always ready on your laptop.</p>
-      </div>
-    </div>
-
-    <div class="step-arrow">↓</div>
-
-    <div class="step-card">
-      <div class="step-header">
-        <span class="step-num">Step 3</span>
-        <span class="step-title">Open the App</span>
-      </div>
-      <div class="step-body">
-        <p><strong>On Windows:</strong> Open the HER-AI folder, click the address bar at the top, type <strong>cmd</strong>, and press Enter. This opens a black window.</p>
-        <p><strong>On Mac:</strong> Right-click the HER-AI folder and choose <strong>"Open Terminal here"</strong>.</p>
-        <p>Then type this and press Enter:</p>
-        <div class="step-code">python -m http.server 5500</div>
-        <p class="step-alt">You'll see a message saying "Serving HTTP..." — that means it's working! Keep this window open.</p>
-      </div>
-    </div>
-
-    <div class="step-arrow">↓</div>
-
-    <div class="step-card step-card-highlight">
-      <div class="step-header">
-        <span class="step-num">Step 4</span>
-        <span class="step-title">Start Using HER-AI!</span>
-      </div>
-      <div class="step-body">
-        <p>Open your browser (Chrome, Edge, etc.) and type this in the address bar:</p>
-        <div class="step-code">localhost:5500</div>
-        <p>You'll see the HER-AI landing page! Click <strong>"Launch App"</strong> to open your personal dashboard.</p>
-        <p class="step-alt">Bookmark this page so you can find it easily next time.</p>
-      </div>
-    </div>
-
     <div class="step-arrow">↓</div>
 
     <div class="step-card step-card-alt">
       <div class="step-header">
-        <span class="step-num">Optional</span>
-        <span class="step-title">Turn on Smart AI Chat</span>
+        <span class="step-num">Step 4</span>
+        <span class="step-title">🔑 Add Groq API Key</span>
       </div>
       <div class="step-body">
-        <p>Want the AI chatbot to give personalized, human-like responses? Here's how:</p>
-        <p><strong>1.</strong> Go to <a href="https://console.groq.com" target="_blank" style="color:var(--plum);font-weight:600;">console.groq.com</a> and sign up for free</p>
-        <p><strong>2.</strong> Click <strong>"API Keys"</strong> and create a new key (it's a long text code)</p>
-        <p><strong>3.</strong> In the HER-AI app, go to <strong>Settings</strong> (gear icon in sidebar) and paste the key there</p>
-        <p class="step-alt">Without this, the app still works perfectly &mdash; it just uses simpler built-in responses instead of the AI.</p>
+        <p>Get a free API key from Groq in 30 seconds. Paste it in Settings. The AI brain comes alive.</p>
+        <p><strong>1.</strong> Go to <a href="https://console.groq.com" target="_blank" style="color:var(--plum);font-weight:600;">console.groq.com</a> &rarr; Sign up for free</p>
+        <p><strong>2.</strong> Click <strong>"API Keys"</strong> &rarr; Create a new key &rarr; Copy it</p>
+        <p><strong>3.</strong> In the HER-AI app, go to <strong>Settings</strong> (gear icon) &rarr; Paste your key</p>
+        <div class="step-code">Groq API Key: gsk_xxxxx...
+Model: LLaMA 3.3 70B Versatile
+Cost: FREE  |  Speed: Instant</div>
+        <p class="step-alt">Without a key, the app still works using built-in rule-based responses.</p>
+      </div>
+    </div>
+
+    <div class="step-arrow">↓</div>
+
+    <!-- STEP 5: DEPLOY -->
+    <div class="step-card step-card-highlight">
+      <div class="step-header">
+        <span class="step-num">Step 5</span>
+        <span class="step-title">🚀 Push to GitHub. Live.</span>
+      </div>
+      <div class="step-body">
+        <p>Upload to GitHub, enable GitHub Pages. Your app is now live on the internet. No server, no database, no hosting cost.</p>
+        <div class="step-code">git init
+git add .
+git commit -m "HER-AI app"
+git remote add origin https://github.com/YOUR-USERNAME/HER-AI.git
+git push -u origin main</div>
+        <p>Then go to your GitHub repo &rarr; <strong>Settings</strong> &rarr; <strong>Pages</strong> &rarr; Select <strong>main</strong> branch &rarr; Save.</p>
+        <div class="step-code">🌐 your-username.github.io/HER-AI
+✅ Live  |  ✅ Free  |  ✅ Works on any device</div>
+        <p class="step-alt">Anyone can open the link and use your app. Share it with the world!</p>
       </div>
     </div>
   </div>
 
   <!-- BADGE -->
   <div class="badge-footer">
-    <h3>Designed for Everyone, Not Just Developers</h3>
-    <p>HER-AI is built with the simplest web technologies &mdash; just like a regular website. No complicated installations, no paid software, no coding knowledge needed. If you can browse the internet, you can run HER-AI.</p>
+    <h3>2 Prompts. 5 Steps. A Complete Life Operating System.</h3>
+    <p>Anyone can build this. No coding needed. Just open Cursor IDE, paste 2 prompts, add a free API key, and deploy. Your own AI-powered Life Operating System &mdash; live on the internet.</p>
     <div class="no-dep-tags">
-      <span class="no-dep-tag yes">✓ Works Offline</span>
-      <span class="no-dep-tag yes">✓ 100% Free</span>
-      <span class="no-dep-tag yes">✓ Under 500KB</span>
-      <span class="no-dep-tag yes">✓ No Account Needed</span>
-      <span class="no-dep-tag yes">✓ Data Stays on Your Laptop</span>
       <span class="no-dep-tag yes">✓ No Coding Required</span>
+      <span class="no-dep-tag yes">✓ 100% Free</span>
+      <span class="no-dep-tag yes">✓ Works Offline</span>
+      <span class="no-dep-tag yes">✓ No Python Needed</span>
+      <span class="no-dep-tag yes">✓ Data Stays on Your Device</span>
+      <span class="no-dep-tag yes">✓ Deploy in 5 Minutes</span>
     </div>
   </div>
 
@@ -781,6 +819,25 @@ document.querySelectorAll('.prompt-step').forEach(function(el, i) {
   el.style.transitionDelay = (i * 0.2) + 's';
   observer.observe(el);
 });
+
+function copyPrompt(id) {
+  var el = document.getElementById(id + '-display');
+  if (!el) return;
+  var text = el.innerText || el.textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    var btns = document.querySelectorAll('.copy-prompt-btn');
+    btns.forEach(function(btn) {
+      if (btn.getAttribute('onclick').indexOf(id) !== -1) {
+        btn.classList.add('copied');
+        btn.textContent = '\u2713 Copied!';
+        setTimeout(function() {
+          btn.classList.remove('copied');
+          btn.textContent = '\uD83D\uDCCB Copy ' + (id === 'prompt1' ? 'Prompt 1' : 'Prompt 2');
+        }, 2000);
+      }
+    });
+  });
+}
 </script>
 
 </body>
