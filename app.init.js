@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   Dashboard.render();
 
+  AIChat.restoreHistory();
+  Learning.restoreHistory();
+
   if (S.geoReminders.length > 0) {
     Home.checkGeoLocation();
   }

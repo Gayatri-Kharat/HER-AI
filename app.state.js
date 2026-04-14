@@ -30,7 +30,7 @@ const S = {
   },
   save() {
     const d = {};
-    ['user','tasks','events','groceries','expenses','mealPlan','familyEvents','geoReminders','skills','wins','moods','sleepLog','finance','cycle','settings','chatHistory','instructorTopic','instructorWeek'].forEach(k => d[k] = this[k]);
+    ['user','tasks','events','groceries','expenses','mealPlan','familyEvents','geoReminders','skills','wins','moods','sleepLog','finance','cycle','settings','chatHistory','instructorHistory','instructorTopic','instructorWeek'].forEach(k => d[k] = this[k]);
     localStorage.setItem('herai_data', JSON.stringify(d));
   }
 };

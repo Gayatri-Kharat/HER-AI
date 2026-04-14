@@ -1,5 +1,17 @@
 const Learning = {
   setStyle(s) { S.user.learningStyle = s; S.save(); },
+  restoreHistory() {
+    if (!S.instructorHistory || S.instructorHistory.length === 0) return;
+    const container = document.getElementById('instructorMessages');
+    S.instructorHistory.forEach(m => {
+      if (m.role === 'user') {
+        container.innerHTML += `<div class="ic-msg user">${esc(m.content)}</div>`;
+      } else if (m.role === 'ai') {
+        container.innerHTML += `<div class="ic-msg ai"><span class="ic-label">AI Instructor</span>${m.content.replace(/\n/g, '<br>')}</div>`;
+      }
+    });
+    container.scrollTop = container.scrollHeight;
+  },
   openAdd() {
     Modal.open('Add Skill to Learn', `
       <label>Skill Name</label>
@@ -24,20 +36,25 @@ const Learning = {
 
     const container = document.getElementById('instructorMessages');
     container.innerHTML += `<div class="ic-msg user">${esc(msg)}</div>`;
+    if (!S.instructorHistory) S.instructorHistory = [];
+    S.instructorHistory.push({ role: 'user', content: msg });
 
     const thinkingId = 'inst-thinking-' + Date.now();
     container.innerHTML += `<div class="ic-msg ai" id="${thinkingId}"><span class="ic-label">AI Instructor</span><span class="typing-indicator"><span></span><span></span><span></span></span></div>`;
     container.scrollTop = container.scrollHeight;
 
+    let aiResponse;
     try {
-      const response = await AI.instructorChatLLM(msg, S.user.learningStyle);
+      aiResponse = await AI.instructorChatLLM(msg, S.user.learningStyle);
       const el = document.getElementById(thinkingId);
-      if (el) el.innerHTML = `<span class="ic-label">AI Instructor</span>${response.replace(/\n/g, '<br>')}`;
+      if (el) el.innerHTML = `<span class="ic-label">AI Instructor</span>${aiResponse.replace(/\n/g, '<br>')}`;
     } catch (e) {
-      const fallback = AI.instructorChat(msg, S.user.learningStyle);
+      aiResponse = AI.instructorChat(msg, S.user.learningStyle);
       const el = document.getElementById(thinkingId);
-      if (el) el.innerHTML = `<span class="ic-label">AI Instructor</span>${fallback.replace(/\n/g, '<br>')}`;
+      if (el) el.innerHTML = `<span class="ic-label">AI Instructor</span>${aiResponse.replace(/\n/g, '<br>')}`;
     }
+    S.instructorHistory.push({ role: 'ai', content: aiResponse });
+    if (S.instructorHistory.length > 30) S.instructorHistory = S.instructorHistory.slice(-30);
     container.scrollTop = container.scrollHeight;
 
     if (S.skills.length > 0) {

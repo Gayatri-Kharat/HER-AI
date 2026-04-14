@@ -1,4 +1,16 @@
 const AIChat = {
+  restoreHistory() {
+    if (!S.chatHistory || S.chatHistory.length === 0) return;
+    const container = document.getElementById('chatMessages');
+    S.chatHistory.forEach(m => {
+      if (m.role === 'user') {
+        container.innerHTML += `<div class="chat-msg user"><div class="cm-avatar">👩</div><div class="cm-bubble"><div class="cm-text">${esc(m.content)}</div></div></div>`;
+      } else if (m.role === 'assistant') {
+        container.innerHTML += `<div class="chat-msg ai"><div class="cm-avatar">🧠</div><div class="cm-bubble"><div class="cm-text">${m.content.replace(/\n/g, '<br>')}</div></div></div>`;
+      }
+    });
+    container.scrollTop = container.scrollHeight;
+  },
   async send() {
     const input = document.getElementById('chatInput');
     const msg = input.value.trim();
